@@ -26,16 +26,21 @@ struct ContentView: View {
                     VStack(alignment: .leading, spacing: 10) {
                         ForEach(filteredTabs, id: \.self) { tab in
                             NavigationLink(destination: Text(tab.name)) {
-                                VStack(alignment: .leading, spacing: 5) {
-                                    Text(tab.cityName)
-                                        .font(.title)
-                                        .foregroundColor(.blue)
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 5) {
+                                        Text(tab.cityName)
+                                            .font(.title)
+                                            .foregroundColor(.blue)
 
-                                    Text(tab.countryInfo)
-                                        .font(.subheadline)
-                                        .foregroundColor(.gray)
+                                        Text(tab.countryInfo)
+                                            .font(.subheadline)
+                                            .foregroundColor(.gray)
+                                    }
+                                    .padding(10)
+
+                                    Spacer() // To stretch the tab horizontally
+
                                 }
-                                .padding(10)
                                 .background(Color.gray.opacity(0.1))
                                 .cornerRadius(8)
                             }
@@ -52,7 +57,10 @@ struct ContentView: View {
         if searchText.isEmpty {
             return tabs
         } else {
-            return tabs.filter { $0.name.lowercased().contains(searchText.lowercased()) }
+            return tabs.filter { tab in
+                tab.cityName.lowercased().contains(searchText.lowercased()) ||
+                tab.countryInfo.lowercased().contains(searchText.lowercased())
+            }
         }
     }
 }
