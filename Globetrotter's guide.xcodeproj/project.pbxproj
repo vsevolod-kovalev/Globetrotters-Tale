@@ -17,6 +17,8 @@
 		7E9A79362B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */; };
 		7E9A79382B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */; };
 		7E9A79452B8148E9004CD5F4 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79442B8148E9004CD5F4 /* SearchBar.swift */; };
+		C2BCE0E22B8164BD002CFF70 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = C2BCE0E12B8164BD002CFF70 /* OpenAI */; };
+		C2BCE0E42B816649002CFF70 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BCE0E32B816649002CFF70 /* Connection.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,7 @@
 		7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITests.swift; sourceTree = "<group>"; };
 		7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7E9A79442B8148E9004CD5F4 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
+		C2BCE0E32B816649002CFF70 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C2BCE0E22B8164BD002CFF70 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -109,6 +113,7 @@
 				7E9A79442B8148E9004CD5F4 /* SearchBar.swift */,
 				7E581ECE2B815BC6003F1506 /* ResultView.swift */,
 				7E581ED02B816072003F1506 /* LocationModel.swift */,
+				C2BCE0E32B816649002CFF70 /* Connection.swift */,
 			);
 			path = "Globetrotter's guide";
 			sourceTree = "<group>";
@@ -154,6 +159,9 @@
 			dependencies = (
 			);
 			name = "Globetrotter's guide";
+			packageProductDependencies = (
+				C2BCE0E12B8164BD002CFF70 /* OpenAI */,
+			);
 			productName = "Globetrotter's guide";
 			productReference = 7E9A79162B814688004CD5F4 /* Globetrotter's guide.app */;
 			productType = "com.apple.product-type.application";
@@ -226,6 +234,9 @@
 				Base,
 			);
 			mainGroup = 7E9A790D2B814688004CD5F4;
+			packageReferences = (
+				C2BCE0E02B8164BD002CFF70 /* XCRemoteSwiftPackageReference "OpenAI" */,
+			);
 			productRefGroup = 7E9A79172B814688004CD5F4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -269,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9A791C2B814688004CD5F4 /* ContentView.swift in Sources */,
+				C2BCE0E42B816649002CFF70 /* Connection.swift in Sources */,
 				7E581ECF2B815BC6003F1506 /* ResultView.swift in Sources */,
 				7E9A791A2B814688004CD5F4 /* Globetrotter_s_guideApp.swift in Sources */,
 				7E581ED12B816072003F1506 /* LocationModel.swift in Sources */,
@@ -621,6 +633,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C2BCE0E02B8164BD002CFF70 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI/";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.6;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C2BCE0E12B8164BD002CFF70 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2BCE0E02B8164BD002CFF70 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7E9A790E2B814688004CD5F4 /* Project object */;
 }
