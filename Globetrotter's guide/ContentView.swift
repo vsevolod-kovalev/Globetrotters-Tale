@@ -6,6 +6,33 @@
 //
 
 
+func parseResponse(_ response: String) async -> (cityDescription: String, placesToVisit: [String]) {
+    var cityDescription = ""
+    var placesToVisit = [String]()
+    
+    // Extract city description
+    if let range = response.range(of: "<city_description>(.*?)</city_description>", options: .regularExpression) {
+        cityDescription = String(response[range]).replacingOccurrences(of: "<city_description>", with: "").replacingOccurrences(of: "</city_description>", with: "")
+    }
+    
+    // Extract places to visit
+    let regex = try? NSRegularExpression(pattern: "<(one|two|three|four|five|six|seven|eight|nine|ten)>(.*?)</\\1>", options: [])
+    let results = regex?.matches(in: response, options: [], range: NSRange(response.startIndex..., in: response))
+    results?.forEach {
+        for i in 1..<$0.numberOfRanges { // Start from 1 since 0 is the whole match
+            let nsRange = $0.range(at: i)
+            if nsRange.location != NSNotFound, let range = Range(nsRange, in: response) {
+                let match = String(response[range])
+                if !match.isEmpty {
+                    placesToVisit.append(match)
+                }
+            }
+        }
+    }
+    
+    return (cityDescription, placesToVisit)
+}
+
 let initialRequestStr: String = "Your task is to generate a city description for a tour guide feature within a mobile application, organized into two main parts as detailed below:* General Description: * Language: Utilize clear, simple language accessible to all app users. * Content: Offer a brief, one-paragraph description capturing the city's essence, including its atmosphere, cultural heritage, and distinctive qualities. * Format: Enclose this description within <city_description> and </city_description> tags.* Places to Visit: * List: Enumerate ten essential places within the city. * Format: List these locations using specific tags, from <one> to <ten>. Each tag should contain only the name of the place, without any additional descriptions or details.Instructions:* The general description should be concise yet informative, providing a snapshot of what makes the city unique.* For the places to visit, include only the names of the places, ensuring each name is concise (ideally two words or very brief).Example request format:<city_description> Your engaging description here, focusing on the city's unique atmosphere, cultural heritage, and attractions. </city_description> <places_to_visit> <one>Eiffel Tower</one> <two>Central Park</two> <three>Louvre Museum</three> <four>Golden Gate Bridge</four> <five>Colosseum</five> <six>Statue of Liberty</six> <seven>British Museum</seven> <eight>Grand Canyon</eight> <nine>Times Square</nine> <ten>Great Wall</ten> </places_to_visit>Please ensure the city description offers a compelling overview, and the places listed are presented succinctly by name only."
 
 
@@ -16,7 +43,7 @@ struct ContentView: View {
     @State private var query: String = ""
     @State private var isNavigationActive: Bool = false
     
-    @State private var placesDetailedDescriptions: [String] = []
+    @State private var places: [String] = []
 
     var body: some View {
         NavigationView {
@@ -36,7 +63,11 @@ struct ContentView: View {
                         let response = await chat(
                             profileText: "City name: " + self.query + initialRequestStr
                         )
-                        // Use the response as needed, e.g., store it in a property to display in the UI
+                        let (description, places) = await parseResponse(response)
+                            print("City Description: \(description)")
+                            print("Places to Visit: \(places)")
+                        
+
                         self.query = response
                         // Activate navigation link to switch to ResultView
                         self.isNavigationActive = true
