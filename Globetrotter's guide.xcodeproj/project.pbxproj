@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7E581ECF2B815BC6003F1506 /* ResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E581ECE2B815BC6003F1506 /* ResultView.swift */; };
 		7E9A791A2B814688004CD5F4 /* Globetrotter_s_guideApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79192B814688004CD5F4 /* Globetrotter_s_guideApp.swift */; };
 		7E9A791C2B814688004CD5F4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A791B2B814688004CD5F4 /* ContentView.swift */; };
 		7E9A791E2B81468B004CD5F4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7E9A791D2B81468B004CD5F4 /* Assets.xcassets */; };
@@ -35,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7E581ECE2B815BC6003F1506 /* ResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultView.swift; sourceTree = "<group>"; };
 		7E9A79162B814688004CD5F4 /* Globetrotter's guide.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Globetrotter's guide.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9A79192B814688004CD5F4 /* Globetrotter_s_guideApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideApp.swift; sourceTree = "<group>"; };
 		7E9A791B2B814688004CD5F4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -103,6 +105,7 @@
 				7E9A791F2B81468B004CD5F4 /* Globetrotter_s_guide.entitlements */,
 				7E9A79202B81468B004CD5F4 /* Preview Content */,
 				7E9A79442B8148E9004CD5F4 /* SearchBar.swift */,
+				7E581ECE2B815BC6003F1506 /* ResultView.swift */,
 			);
 			path = "Globetrotter's guide";
 			sourceTree = "<group>";
@@ -263,6 +266,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9A791C2B814688004CD5F4 /* ContentView.swift in Sources */,
+				7E581ECF2B815BC6003F1506 /* ResultView.swift in Sources */,
 				7E9A791A2B814688004CD5F4 /* Globetrotter_s_guideApp.swift in Sources */,
 				7E9A79452B8148E9004CD5F4 /* SearchBar.swift in Sources */,
 			);
