@@ -10,23 +10,17 @@ func parseResponse(_ response: String) async -> (cityDescription: String, places
     var cityDescription = ""
     var placesToVisit = [String]()
     
-    // Extract city description
     if let range = response.range(of: "<city_description>(.*?)</city_description>", options: .regularExpression) {
         cityDescription = String(response[range]).replacingOccurrences(of: "<city_description>", with: "").replacingOccurrences(of: "</city_description>", with: "")
     }
     
-    // Extract places to visit
-    let regex = try? NSRegularExpression(pattern: "<(one|two|three|four|five|six|seven|eight|nine|ten)>(.*?)</\\1>", options: [])
+    let regex = try? NSRegularExpression(pattern: "<(?:one|two|three|four|five|six|seven|eight|nine|ten)>(.*?)</(?:one|two|three|four|five|six|seven|eight|nine|ten)>", options: [])
     let results = regex?.matches(in: response, options: [], range: NSRange(response.startIndex..., in: response))
     results?.forEach {
-        for i in 1..<$0.numberOfRanges { // Start from 1 since 0 is the whole match
-            let nsRange = $0.range(at: i)
-            if nsRange.location != NSNotFound, let range = Range(nsRange, in: response) {
-                let match = String(response[range])
-                if !match.isEmpty {
-                    placesToVisit.append(match)
-                }
-            }
+        let nsRange = $0.range(at: 1)
+        if nsRange.location != NSNotFound, let range = Range(nsRange, in: response) {
+            let match = String(response[range])
+            placesToVisit.append(match)
         }
     }
     
@@ -68,7 +62,7 @@ struct ContentView: View {
                             print("Places to Visit: \(places)")
                         
 
-                        self.query = response
+                        self.query = description
                         // Activate navigation link to switch to ResultView
                         self.isNavigationActive = true
                     }
