@@ -7,9 +7,25 @@
 
 import SwiftUI
 
+func getLocations(placesToVisit: [String]) -> [Location] {
+    var result: [Location]
+    
+    for place in placesToVisit {
+        let location = Location(
+            name: place,
+            imageName: "\(place.lowercased())_image", // Create imageName from place name
+            description: "Description for {\(place)}."
+        )
+        result.append(location)
+    }
+}
+
 struct ResultView: View {
     @Binding var query: String
-
+    var cityDescription: String
+    var placesToVisit: [String]
+    var locations: [Location] = getLocations(placesToVisit: <#T##[String]#>)
+    
     var sampleLocations: [Location] = [
         Location(name: "Location 1", imageName: "location1", description: "Description for Location 1."),
         Location(name: "Location 2", imageName: "location2", description: "Description for Location 2."),
@@ -32,7 +48,7 @@ struct ResultView: View {
                         .padding()
 
                     ForEach(sampleLocations.indices, id: \.self) { index in
-                        NavigationLink(destination: LocationDetailView(location: sampleLocations[index]), tag: index, selection: $selectedLocationIndex) {
+                        NavigationLink(destination: LocationDetailView(location: locations[index]), tag: index, selection: $selectedLocationIndex) {
                             LocationTabView(location: sampleLocations[index])
                         }
                         .buttonStyle(PlainButtonStyle())
