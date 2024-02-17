@@ -15,6 +15,8 @@ struct ContentView: View {
     @State private var searchText: String = ""
     @State private var query: String = ""
     @State private var isNavigationActive: Bool = false
+    
+    @State private var placesDetailedDescriptions: [String] = []
 
     var body: some View {
         NavigationView {
