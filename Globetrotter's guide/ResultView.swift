@@ -40,8 +40,8 @@ struct ResultView: View {
                 }
                 .navigationBarTitle("Result")
                 .onAppear {
-                    // Pre-select the first location when the view appears
-                    selectedLocationIndex = sampleLocations.indices.first
+                    // Set selectedLocationIndex to nil to disable automatic opening
+                    selectedLocationIndex = nil
                 }
             }
         }
