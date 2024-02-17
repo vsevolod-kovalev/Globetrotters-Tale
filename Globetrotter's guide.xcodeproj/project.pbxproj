@@ -14,6 +14,7 @@
 		7E9A792C2B81468B004CD5F4 /* Globetrotter_s_guideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A792B2B81468B004CD5F4 /* Globetrotter_s_guideTests.swift */; };
 		7E9A79362B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */; };
 		7E9A79382B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */; };
+		7E9A79452B8148E9004CD5F4 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79442B8148E9004CD5F4 /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		7E9A79312B81468B004CD5F4 /* Globetrotter's guideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Globetrotter's guideUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITests.swift; sourceTree = "<group>"; };
 		7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7E9A79442B8148E9004CD5F4 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +102,7 @@
 				7E9A791D2B81468B004CD5F4 /* Assets.xcassets */,
 				7E9A791F2B81468B004CD5F4 /* Globetrotter_s_guide.entitlements */,
 				7E9A79202B81468B004CD5F4 /* Preview Content */,
+				7E9A79442B8148E9004CD5F4 /* SearchBar.swift */,
 			);
 			path = "Globetrotter's guide";
 			sourceTree = "<group>";
@@ -261,6 +264,7 @@
 			files = (
 				7E9A791C2B814688004CD5F4 /* ContentView.swift in Sources */,
 				7E9A791A2B814688004CD5F4 /* Globetrotter_s_guideApp.swift in Sources */,
+				7E9A79452B8148E9004CD5F4 /* SearchBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
