@@ -14,6 +14,17 @@ func getLocations(placesTV: [String] ) -> [Location] {
     return result
 }
 
+func truncateString(_ string: String, toLength length: Int) -> String {
+    let trimmedString = string.trimmingCharacters(in: .whitespacesAndNewlines)
+    if trimmedString.count > length {
+        let index = trimmedString.index(trimmedString.startIndex, offsetBy: length)
+        return String(trimmedString[..<index]) + "..."
+    } else {
+        return trimmedString
+    }
+}
+
+
 struct ResultView: View {
     @Binding var query: String
     var cityDescriptionArg: String
@@ -25,7 +36,14 @@ struct ResultView: View {
             List(Array(combinedPlaces.enumerated()), id: \.offset) { index, place in
                 NavigationLink(destination: LocationDetailView(location: Location(name: place.name, imageName: index < imageUrls.count ? imageUrls[index] : "placeholder", description: place.description))) {
                     HStack {
-                        Text(place.name)
+                        VStack(alignment: .leading) {
+                            Text(place.name)
+                                .fontWeight(.bold)
+
+                            Text(truncateString(place.description, toLength: 50))
+                                .font(.subheadline)
+                                .foregroundColor(.gray)
+                        }
                         
                         Spacer()
                         
@@ -123,6 +141,7 @@ struct LocationDetailView: View {
                 Text(location.name)
                     .font(.title)
                     .fontWeight(.bold)
+                    .padding(.top, 5)
                     .padding(.bottom, 5)
 
                 Text(location.description)
