@@ -109,7 +109,7 @@ struct ContentView: View {
                     self.progressValue = 0.0
                     Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
                         if self.progressValue < 100 {
-                            self.progressValue += 0.6
+                            self.progressValue += 0.7
                         } else {
                             timer.invalidate()
                             self.isLoading = false
