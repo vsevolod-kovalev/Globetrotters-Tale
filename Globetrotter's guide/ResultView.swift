@@ -72,28 +72,31 @@ struct LocationTabView: View {
     var location: Location
 
     var body: some View {
-        VStack {
+        HStack {
             location.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
-                .frame(height: 150)
+                .frame(maxWidth: .infinity, maxHeight: 150)
                 .cornerRadius(10)
-                .padding()
 
-            Text(location.name)
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.bottom, 5)
+            VStack(alignment: .leading) {
+                Text(location.name)
+                    .font(.title)
+                    .fontWeight(.bold)
 
-            Text(location.description)
-                .foregroundColor(.gray)
-                .padding()
+                Text(location.description)
+                    .foregroundColor(.gray)
+                    .lineLimit(2)
+            }
+            .padding(.horizontal, 10)
+            .frame(maxWidth: .infinity, alignment: .leading)
         }
         .background(Color(.systemGray6))
         .cornerRadius(10)
         .padding()
     }
 }
+
 
 struct LocationDetailView: View {
     var location: Location
