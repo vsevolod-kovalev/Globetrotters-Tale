@@ -2,9 +2,8 @@ import Foundation
 import OpenAI
 
 
-
-let openAI = OpenAI(apiToken: "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")
-let configuration_c = OpenAI.Configuration(token: "oyAPND99RrrokwibydpUT3BlbkFJujM7AZnvb1FTtZEljU6e", organizationIdentifier: "org-CLpwE3pzv2hEzxl6yZVTY2DN", timeoutInterval: 10.0)
+let openAI = OpenAI(apiToken: "TOKEN_HERE")
+let configuration_c = OpenAI.Configuration(token: "TOKEN_HERE", organizationIdentifier: "org-TOKEN HERE", timeoutInterval: 10.0)
 
 func chat(profileText: String, model_s: Model) async -> String {
     let query = ChatQuery(model: model_s, messages: [.init(role: .user, content: profileText)])
