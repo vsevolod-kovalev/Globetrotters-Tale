@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-func getLocations(placesToVisit: [String]) -> [Location] {
-    var result: [Location]
+func getLocations(placesTV: [String] ) -> [Location] {
+    var result: [Location] = []
     
-    for place in placesToVisit {
+    for place in placesTV {
         let location = Location(
             name: place,
             imageName: "\(place.lowercased())_image", // Create imageName from place name
@@ -18,13 +18,14 @@ func getLocations(placesToVisit: [String]) -> [Location] {
         )
         result.append(location)
     }
+    return result
 }
 
 struct ResultView: View {
     @Binding var query: String
-    var cityDescription: String
-    var placesToVisit: [String]
-    var locations: [Location] = getLocations(placesToVisit: <#T##[String]#>)
+    var cityDescriptionArg: String
+    var placesArg: [String]
+    //var locations: [Location]
     
     var sampleLocations: [Location] = [
         Location(name: "Location 1", imageName: "location1", description: "Description for Location 1."),
@@ -32,10 +33,13 @@ struct ResultView: View {
         Location(name: "Location 3", imageName: "location3", description: "Description for Location 3."),
         // Add more sample locations as needed
     ]
-
+    
     @State private var selectedLocationIndex: Int?
 
     var body: some View {
+        
+        let locations = getLocations(placesTV: placesArg)
+        
         NavigationView {
             ScrollView(.vertical) {
                 VStack {
@@ -47,9 +51,9 @@ struct ResultView: View {
                         .foregroundColor(.gray)
                         .padding()
 
-                    ForEach(sampleLocations.indices, id: \.self) { index in
+                    ForEach(locations.indices, id: \.self) { index in
                         NavigationLink(destination: LocationDetailView(location: locations[index]), tag: index, selection: $selectedLocationIndex) {
-                            LocationTabView(location: sampleLocations[index])
+                            LocationTabView(location: locations[index])
                         }
                         .buttonStyle(PlainButtonStyle())
                     }

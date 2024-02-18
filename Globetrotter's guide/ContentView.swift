@@ -39,13 +39,17 @@ struct ContentView: View {
     
     @State private var places: [String] = []
 
+    //Placeholder vars for the NavigationLink
+    @State private var cd: String = ""
+    @State private var ptv: [String] = []
+    
     var body: some View {
         NavigationView {
             VStack {
                 SearchBar(text: $searchText)
                     .padding()
                 
-                NavigationLink(destination: ResultView(query: $query), isActive: $isNavigationActive) {
+                NavigationLink(destination: ResultView(query: $query, cityDescriptionArg: cd,   placesArg: ptv), isActive: $isNavigationActive) {
                     EmptyView()
                 }
                 
@@ -63,6 +67,8 @@ struct ContentView: View {
                         
 
                         self.query = description
+                        self.cd = description
+                        self.ptv = places
                         // Activate navigation link to switch to ResultView
                         self.isNavigationActive = true
                     }
