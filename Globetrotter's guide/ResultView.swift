@@ -89,11 +89,36 @@ struct LocationDetailView: View {
     var body: some View {
         ScrollView {
             VStack {
-                Image(location.imageName)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                    .padding()
+                if let imageUrl = URL(string: location.imageName) {
+                    AsyncImage(url: imageUrl) { phase in
+                        switch phase {
+                        case .empty:
+                            ProgressView()
+                        case .success(let image):
+                            image.resizable()
+                                 .aspectRatio(contentMode: .fill)
+                                 .cornerRadius(10)
+                        case .failure:
+                            Image(systemName: "photo")
+                                 .resizable()
+                                 .aspectRatio(contentMode: .fill)
+                                 .cornerRadius(10)
+                        @unknown default:
+                            EmptyView()
+                        }
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 150)
+                    .padding(.horizontal, 0)
+                    .clipped()
+                } else {
+                    Image("placeholder")
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .cornerRadius(10)
+                        .frame(maxWidth: .infinity, maxHeight: 150)
+                        .padding(.horizontal, 0)
+                        .clipped()
+                }
 
                 Text(location.name)
                     .font(.title)
@@ -108,3 +133,5 @@ struct LocationDetailView: View {
         }
     }
 }
+
+
