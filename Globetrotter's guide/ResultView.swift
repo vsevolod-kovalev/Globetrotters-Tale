@@ -1,4 +1,5 @@
 import SwiftUI
+import AVFoundation
 
 func getLocations(placesTV: [String] ) -> [Location] {
     var result: [Location] = []
