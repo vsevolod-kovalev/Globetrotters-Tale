@@ -102,6 +102,23 @@ struct LocationTabView: View {
 
 struct LocationDetailView: View {
     var location: Location
+    
+    @State var synthesizer = AVSpeechSynthesizer()
+
+        func speakText(_ text: String) {
+            // Initialize a speech synthesizer
+            let speechSynthesizer = synthesizer
+
+            // Create an utterance with the text you want to speak
+            let utterance = AVSpeechUtterance(string: text)
+
+            // Optionally, adjust the utterance properties for a more natural sounding voice
+            utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.rate = 0.5
+
+            // Use the speech synthesizer to speak the utterance
+            speechSynthesizer.speak(utterance)
+        }
 
     var body: some View {
         ScrollView {
@@ -147,6 +164,21 @@ struct LocationDetailView: View {
                     .padding()
             }
             .navigationBarTitle(location.name, displayMode: .inline)
+        }
+        .overlay {
+            VStack {
+                Spacer()
+                Button(action: {
+                    speakText(location.description)
+                }) {
+                    Text("Text-to-Speech")
+                        .padding()
+                        .frame(maxWidth: 400) // Stretch the button horizontally
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
         }
     }
 }
