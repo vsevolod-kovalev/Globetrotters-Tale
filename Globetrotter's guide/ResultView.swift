@@ -71,9 +71,6 @@ struct ResultView: View {
     }
 }
 
-
-
-
 struct LocationTabView: View {
     var location: Location
 
@@ -107,7 +104,7 @@ struct LocationDetailView: View {
     @State var synthesizer = AVSpeechSynthesizer()
 
         func speakText(_ text: String) {
-            // Initialize a speech synthesizer
+        
             let speechSynthesizer = synthesizer
 
             // Create an utterance with the text you want to speak
@@ -115,10 +112,13 @@ struct LocationDetailView: View {
 
             // Optionally, adjust the utterance properties for a more natural sounding voice
             utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+            utterance.pitchMultiplier = 1.0
             utterance.rate = 0.5
-
             // Use the speech synthesizer to speak the utterance
             speechSynthesizer.speak(utterance)
+        }
+        func stopSpeaking() {
+            synthesizer.stopSpeaking(at: .immediate)
         }
 
     var body: some View {
@@ -155,14 +155,16 @@ struct LocationDetailView: View {
                         .clipped()
                 }
 
-                Text(location.name)
+                Text(location.name.trimmingCharacters(in: .whitespacesAndNewlines))
                     .font(.title)
                     .fontWeight(.bold)
                     .padding(.top, 10)
+                    .padding(.bottom, 10)
 
                 Text(location.description)
                     .foregroundColor(.gray)
-                    .padding()
+                    .padding(.bottom, 70)
+                    .padding(.horizontal, 20)
             }
             .navigationBarTitle(location.name, displayMode: .inline)
         }
@@ -180,6 +182,9 @@ struct LocationDetailView: View {
                         .cornerRadius(10)
                 }
             }
+        }
+        .onDisappear {
+            stopSpeaking()
         }
     }
 }

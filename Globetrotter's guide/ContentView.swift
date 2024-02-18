@@ -44,8 +44,6 @@ class ImageFetcher {
     }
 }
 
-
-
 func parseResponse(_ response: String) async -> (cityDescription: String, placesToVisit: [String]) {
     var cityDescription = ""
     var placesToVisit = [String]()
@@ -66,7 +64,6 @@ func parseResponse(_ response: String) async -> (cityDescription: String, places
     
     return (cityDescription, placesToVisit)
 }
-
 let initialRequestStr: String = "Your task is to generate a city description for a tour guide feature within a mobile application, organized into two main parts as detailed below:* General Description: * Language: Utilize clear, simple language accessible to all app users. * Content: Offer a brief, one-paragraph description capturing the city's essence, including its atmosphere, cultural heritage, and distinctive qualities. * Format: Enclose this description within <city_description> and </city_description> tags.* Places to Visit: * List: Enumerate eight essential places within the city. * Format: List these locations using specific tags, from <one> to <eight>. Each tag should contain only the name of the place, without any additional descriptions or details.Instructions:* The general description should be concise yet informative, providing a snapshot of what makes the city unique.* For the places to visit, include only the names of the places, ensuring each name is concise (ideally two words or very brief).Example request format:<city_description> Your engaging description here, focusing on the city's unique atmosphere, cultural heritage, and attractions. </city_description> <places_to_visit> <one>Eiffel Tower</one> <two>Central Park</two> <three>Louvre Museum</three> <four>Golden Gate Bridge</four> <five>Colosseum</five> <six>Statue of Liberty</six> <seven>British Museum</seven> <eight>Grand Canyon</eight> </places_to_visit>Please ensure the city description offers a compelling overview, and the places listed are presented succinctly by name only."
 let secondaryRequestStr: String = "Create a detailed, narrative-driven description of a specific place for our tour guide app feature. The content should span two paragraphs within <place_description></place_description> tags, focusing on:* Introduction to the place's atmosphere and cultural significance.* Historical context and unique features.Aim to captivate and inform app users, enriching their understanding and enticing them to visit.Example format:<place_description> Engaging, detailed two-paragraph description covering the mentioned aspects. </place_description>Ensure the narrative is immersive, offering a comprehensive view of the place's heritage and visitor experiences."
 
@@ -85,23 +82,6 @@ struct ContentView: View {
     @State private var ImagePaths: [String] = []
     @State private var combinedPlaces: [(name: String, description: String)] = []
     
-    @State var synthesizer = AVSpeechSynthesizer()
-    
-    func speakText(_ text: String) {
-        // Initialize a speech synthesizer
-        let speechSynthesizer = synthesizer
-
-        // Create an utterance with the text you want to speak
-        let utterance = AVSpeechUtterance(string: text)
-
-        // Optionally, adjust the utterance properties for a more natural sounding voice
-        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-        utterance.rate = 0.5
-
-        // Use the speech synthesizer to speak the utterance
-        speechSynthesizer.speak(utterance)
-    }
-    
     var body: some View {
         NavigationView {
             VStack {
@@ -112,32 +92,10 @@ struct ContentView: View {
                     EmptyView()
                 }
                 
-                Button("Speak") {
-                    // Call the function to start TTS
-                    speakText("Hello, world! This is a simple demonstration of text-to-speech capabilities in Swift.")
-                }
-                
-                Button("Test Navigation") {
-                    self.isNavigationActive = true
-                }
+//                Button("Test Navigation") {
+//                    self.isNavigationActive = true
+//                }
                 Button(action: {
-                    
-
-                    // Initialize a speech synthesizer
-                    let speechSynthesizer = AVSpeechSynthesizer()
-
-                    // Create an utterance with the text you want to speak
-                    let utterance = AVSpeechUtterance(string: "Hello, world! This is a simple demonstration of text-to-speech capabilities in Swift.")
-
-                    // Optionally, adjust the utterance properties for a more natural sounding voice
-                    utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
-                    utterance.rate = 0.5
-
-                    // Use the speech synthesizer to speak the utterance
-                    speechSynthesizer.speak(utterance)
-
-                    
-
                     print("Generate button tapped")
                     self.query = self.searchText
                     Task {
@@ -189,6 +147,10 @@ struct ContentView: View {
                         .foregroundColor(Color.white)
                         .cornerRadius(10)
                 }
+                Text("Generation can take up to a minute...")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                    .padding(.top, 2)
             }
             .padding()
             .navigationBarTitle("Let's travel to...")
