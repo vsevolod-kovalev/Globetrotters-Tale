@@ -64,7 +64,7 @@ struct ResultView: View {
                 }
             }
             .listStyle(PlainListStyle())
-            .navigationBarTitle("Results")
+            .navigationBarTitle("Places to visit")
             
         }
     }

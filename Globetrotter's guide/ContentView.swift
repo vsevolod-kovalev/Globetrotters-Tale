@@ -213,7 +213,6 @@ struct SearchBar: View {
                 .cornerRadius(8)
             
             Button(action: {
-                // Clear the text field
                 self.text = ""
             }) {
                 Image(systemName: "xmark.circle.fill")
