@@ -85,7 +85,22 @@ struct ContentView: View {
     @State private var ImagePaths: [String] = []
     @State private var combinedPlaces: [(name: String, description: String)] = []
     
+    @State var synthesizer = AVSpeechSynthesizer()
+    
+    func speakText(_ text: String) {
+        // Initialize a speech synthesizer
+        let speechSynthesizer = synthesizer
 
+        // Create an utterance with the text you want to speak
+        let utterance = AVSpeechUtterance(string: text)
+
+        // Optionally, adjust the utterance properties for a more natural sounding voice
+        utterance.voice = AVSpeechSynthesisVoice(language: "en-US")
+        utterance.rate = 0.5
+
+        // Use the speech synthesizer to speak the utterance
+        speechSynthesizer.speak(utterance)
+    }
     
     var body: some View {
         NavigationView {
@@ -95,6 +110,11 @@ struct ContentView: View {
                 
                 NavigationLink(destination: ResultView(query: $query, cityDescriptionArg: cd, combinedPlaces: combinedPlaces, imageUrls: ImagePaths), isActive: $isNavigationActive) {
                     EmptyView()
+                }
+                
+                Button("Speak") {
+                    // Call the function to start TTS
+                    speakText("Hello, world! This is a simple demonstration of text-to-speech capabilities in Swift.")
                 }
                 
                 Button("Test Navigation") {
@@ -155,7 +175,7 @@ struct ContentView: View {
                             self.ptv = places
                             self.combinedPlaces = localCombinedPlaces
                             self.ImagePaths = localImagePaths
-                            self.isNavigationActive = true // Trigger navigation
+                            self.isNavigationActive = true
                         }
                     }
                 }) {
