@@ -82,6 +82,9 @@ struct ContentView: View {
     @State private var ImagePaths: [String] = []
     @State private var combinedPlaces: [(name: String, description: String)] = []
     
+    @State private var progressValue: Double = 0.0
+    @State private var isLoading: Bool = false
+    
     var body: some View {
         NavigationView {
             VStack {
@@ -95,7 +98,24 @@ struct ContentView: View {
 //                Button("Test Navigation") {
 //                    self.isNavigationActive = true
 //                }
+                if isLoading {
+                    ProgressView(value: progressValue, total: 100)
+                        .progressViewStyle(LinearProgressViewStyle())
+                        .frame(width: 200, height: 20)
+                        .padding()
+                }
                 Button(action: {
+                    self.isLoading = true
+                    self.progressValue = 0.0
+                    Timer.scheduledTimer(withTimeInterval: 0.3, repeats: true) { timer in
+                        if self.progressValue < 100 {
+                            self.progressValue += 0.6
+                        } else {
+                            timer.invalidate()
+                            self.isLoading = false
+                        }
+                    }
+                    
                     print("Generate button tapped")
                     self.query = self.searchText
                     Task {
