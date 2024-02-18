@@ -16,6 +16,7 @@
 		7E9A792C2B81468B004CD5F4 /* Globetrotter_s_guideTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A792B2B81468B004CD5F4 /* Globetrotter_s_guideTests.swift */; };
 		7E9A79362B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */; };
 		7E9A79382B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */; };
+		7EFF23E62B8192FD00989295 /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7EFF23E52B8192FD00989295 /* ImageGenerator.swift */; };
 		C2BCE0E22B8164BD002CFF70 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = C2BCE0E12B8164BD002CFF70 /* OpenAI */; };
 		C2BCE0E42B816649002CFF70 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2BCE0E32B816649002CFF70 /* Connection.swift */; };
 /* End PBXBuildFile section */
@@ -51,6 +52,7 @@
 		7E9A79312B81468B004CD5F4 /* Globetrotter's guideUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Globetrotter's guideUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E9A79352B81468B004CD5F4 /* Globetrotter_s_guideUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITests.swift; sourceTree = "<group>"; };
 		7E9A79372B81468B004CD5F4 /* Globetrotter_s_guideUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globetrotter_s_guideUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		7EFF23E52B8192FD00989295 /* ImageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerator.swift; sourceTree = "<group>"; };
 		C2BCE0E32B816649002CFF70 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,6 +113,7 @@
 				7E581ECE2B815BC6003F1506 /* ResultView.swift */,
 				7E581ED02B816072003F1506 /* LocationModel.swift */,
 				C2BCE0E32B816649002CFF70 /* Connection.swift */,
+				7EFF23E52B8192FD00989295 /* ImageGenerator.swift */,
 			);
 			path = "Globetrotter's guide";
 			sourceTree = "<group>";
@@ -277,6 +280,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7E9A791C2B814688004CD5F4 /* ContentView.swift in Sources */,
+				7EFF23E62B8192FD00989295 /* ImageGenerator.swift in Sources */,
 				C2BCE0E42B816649002CFF70 /* Connection.swift in Sources */,
 				7E581ECF2B815BC6003F1506 /* ResultView.swift in Sources */,
 				7E9A791A2B814688004CD5F4 /* Globetrotter_s_guideApp.swift in Sources */,
