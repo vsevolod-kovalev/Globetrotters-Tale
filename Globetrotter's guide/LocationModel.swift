@@ -9,6 +9,6 @@ import SwiftUI
 
 struct Location {
     var name: String
-    var imageName: String
+    var image: Image //used to instantiate the image from the source.
     var description: String
 }

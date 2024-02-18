@@ -13,7 +13,7 @@ func getLocations(placesTV: [String] ) -> [Location] {
     for place in placesTV {
         let location = Location(
             name: place,
-            imageName: "\(place.lowercased())_image", // Create imageName from place name
+            image: Image("sample_img"), // Create imageName from place name
             description: "Description for {\(place)}."
         )
         result.append(location)
@@ -28,9 +28,9 @@ struct ResultView: View {
     //var locations: [Location]
     
     var sampleLocations: [Location] = [
-        Location(name: "Location 1", imageName: "location1", description: "Description for Location 1."),
-        Location(name: "Location 2", imageName: "location2", description: "Description for Location 2."),
-        Location(name: "Location 3", imageName: "location3", description: "Description for Location 3."),
+        //Location(name: "Location 1", imageResource: ImageResource(sample_img), description: "Description for Location 1."),
+        //Location(name: "Location 2", imageResource: sample_img, description: "Description for Location 2."),
+        //Location(name: "Location 3", imageResource: sample_img, description: "Description for Location 3."),
         // Add more sample locations as needed
     ]
     
@@ -73,7 +73,7 @@ struct LocationTabView: View {
 
     var body: some View {
         VStack {
-            Image(location.imageName)
+            location.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .frame(height: 150)
@@ -100,7 +100,7 @@ struct LocationDetailView: View {
 
     var body: some View {
         VStack {
-            Image(location.imageName)
+            location.image
                 .resizable()
                 .aspectRatio(contentMode: .fit)
                 .cornerRadius(10)
