@@ -163,7 +163,7 @@ struct LocationDetailView: View {
 
                 Text(location.description)
                     .foregroundColor(.gray)
-                    .padding(.bottom, 70)
+                    .padding(.bottom, 50)
                     .padding(.horizontal, 20)
             }
             .navigationBarTitle(location.name, displayMode: .inline)
