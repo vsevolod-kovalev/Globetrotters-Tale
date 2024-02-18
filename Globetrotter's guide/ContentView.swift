@@ -38,10 +38,15 @@ struct ContentView: View {
     @State private var isNavigationActive: Bool = false
     
     @State private var places: [String] = []
+    @State private var placesFull: [String] = []
 
     //Placeholder vars for the NavigationLink
     @State private var cd: String = ""
     @State private var ptv: [String] = []
+    @State private var combinedPlaces: [(name: String, description: String)] = []
+
+    
+    
     
     var body: some View {
         NavigationView {
@@ -49,7 +54,7 @@ struct ContentView: View {
                 SearchBar(text: $searchText)
                     .padding()
                 
-                NavigationLink(destination: ResultView(query: $query, cityDescriptionArg: cd,   placesArg: ptv), isActive: $isNavigationActive) {
+                NavigationLink(destination: ResultView(query: $query, cityDescriptionArg: cd, combinedPlaces: combinedPlaces), isActive: $isNavigationActive) {
                     EmptyView()
                 }
                 
@@ -59,18 +64,30 @@ struct ContentView: View {
                     // Run the chat function asynchronously
                     Task {
                         let response = await chat(
-                            profileText: "City name: " + self.query + initialRequestStr
+                            profileText: "City name: " + self.query + initialRequestStr, model_s: .gpt4_0125_preview
                         )
                         let (description, places) = await parseResponse(response)
-                            print("City Description: \(description)")
-                            print("Places to Visit: \(places)")
+                        print("City Description: \(description)")
+                        print("Places to Visit: \(places)")
                         
+                        var localCombinedPlaces: [(name: String, description: String)] = []
 
-                        self.query = description
-                        self.cd = description
-                        self.ptv = places
-                        // Activate navigation link to switch to ResultView
-                        self.isNavigationActive = true
+                        for place in places {
+                            let response = await chat(
+                                profileText: "City name: " + self.query + ". Place name: " + place + secondaryRequestStr, model_s: .gpt3_5Turbo_0125
+                            )
+                            print(place, response)
+                            localCombinedPlaces.append((name: place, description: response))
+                        }
+                        
+                        // Now update the state variable to trigger UI update
+                        DispatchQueue.main.async {
+                            self.combinedPlaces = localCombinedPlaces
+                            self.cd = description
+                            self.ptv = places
+                            // Activate navigation link to switch to ResultView
+                            self.isNavigationActive = true
+                        }
                     }
                 }) {
                     Text("Generate")

@@ -24,49 +24,32 @@ func getLocations(placesTV: [String] ) -> [Location] {
 struct ResultView: View {
     @Binding var query: String
     var cityDescriptionArg: String
-    var placesArg: [String]
-    //var locations: [Location]
-    
-    var sampleLocations: [Location] = [
-        Location(name: "Location 1", imageName: "location1", description: "Description for Location 1."),
-        Location(name: "Location 2", imageName: "location2", description: "Description for Location 2."),
-        Location(name: "Location 3", imageName: "location3", description: "Description for Location 3."),
-        // Add more sample locations as needed
-    ]
-    
-    @State private var selectedLocationIndex: Int?
+    var combinedPlaces: [(name: String, description: String)]
 
     var body: some View {
-        
-        let locations = getLocations(placesTV: placesArg)
-        
         NavigationView {
-            ScrollView(.vertical) {
-                VStack {
-                    Text("Result Page")
-                        .font(.largeTitle)
-                        .padding()
-                    
-                    Text("Query: \(query)")
-                        .foregroundColor(.gray)
-                        .padding()
-
-                    ForEach(locations.indices, id: \.self) { index in
-                        NavigationLink(destination: LocationDetailView(location: locations[index]), tag: index, selection: $selectedLocationIndex) {
-                            LocationTabView(location: locations[index])
-                        }
-                        .buttonStyle(PlainButtonStyle())
+            List(Array(combinedPlaces.enumerated()), id: \.offset) { index, place in
+                NavigationLink(destination: LocationDetailView(location: Location(name: place.name, imageName: "sample", description: place.description))) {
+                    HStack {
+                        Text(place.name)
+                        
+                        Spacer()
+                        
+                        Image("sample")
+                            .resizable()
+                            .aspectRatio(contentMode: .fill)
+                            .frame(width: 50, height: 50) // Adjust size as needed
+                            .clipped()
+                            .cornerRadius(5)
                     }
                 }
-                .navigationBarTitle("Result")
-                .onAppear {
-                    // Set selectedLocationIndex to nil to disable automatic opening
-                    selectedLocationIndex = nil
-                }
             }
+            .navigationBarTitle("Results")
         }
     }
 }
+
+
 
 struct LocationTabView: View {
     var location: Location
@@ -99,22 +82,24 @@ struct LocationDetailView: View {
     var location: Location
 
     var body: some View {
-        VStack {
-            Image(location.imageName)
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .cornerRadius(10)
-                .padding()
+        ScrollView {
+            VStack {
+                Image(location.imageName)
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .cornerRadius(10)
+                    .padding()
 
-            Text(location.name)
-                .font(.title)
-                .fontWeight(.bold)
-                .padding(.bottom, 5)
+                Text(location.name)
+                    .font(.title)
+                    .fontWeight(.bold)
+                    .padding(.bottom, 5)
 
-            Text(location.description)
-                .foregroundColor(.gray)
-                .padding()
+                Text(location.description) // Assuming this is the full description
+                    .foregroundColor(.gray)
+                    .padding()
+            }
+            .navigationBarTitle(location.name, displayMode: .inline)
         }
-        .navigationBarTitle(location.name)
     }
 }
