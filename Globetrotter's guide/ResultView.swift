@@ -1,10 +1,3 @@
-//
-//  ResultView.swift
-//  Globetrotter's guide
-//
-//  Created by Samuel Hickman on 2/17/24.
-//
-
 import SwiftUI
 
 func getLocations(placesTV: [String] ) -> [Location] {
@@ -13,7 +6,7 @@ func getLocations(placesTV: [String] ) -> [Location] {
     for place in placesTV {
         let location = Location(
             name: place,
-            imageName: "\(place.lowercased())_image", // Create imageName from place name
+            imageName: "\(place.lowercased())_image",
             description: "Description for {\(place)}."
         )
         result.append(location)
@@ -25,22 +18,33 @@ struct ResultView: View {
     @Binding var query: String
     var cityDescriptionArg: String
     var combinedPlaces: [(name: String, description: String)]
+    var imageUrls: [String]
 
     var body: some View {
         NavigationView {
             List(Array(combinedPlaces.enumerated()), id: \.offset) { index, place in
-                NavigationLink(destination: LocationDetailView(location: Location(name: place.name, imageName: "sample", description: place.description))) {
+                NavigationLink(destination: LocationDetailView(location: Location(name: place.name, imageName: index < imageUrls.count ? imageUrls[index] : "placeholder", description: place.description))) {
                     HStack {
                         Text(place.name)
                         
                         Spacer()
                         
-                        Image("sample")
-                            .resizable()
-                            .aspectRatio(contentMode: .fill)
-                            .frame(width: 50, height: 50) // Adjust size as needed
-                            .clipped()
-                            .cornerRadius(5)
+                        // Use AsyncImage to load image from URL
+                        if index < imageUrls.count, let url = URL(string: imageUrls[index]) {
+                            AsyncImage(url: url) { image in
+                                image.resizable()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: 50, height: 50)
+                            .clipShape(RoundedRectangle(cornerRadius: 5))
+                        } else {
+                            // Placeholder image or view when URL is not available
+                            Image(systemName: "photo")
+                                .resizable()
+                                .frame(width: 50, height: 50)
+                                .clipShape(RoundedRectangle(cornerRadius: 5))
+                        }
                     }
                 }
             }
@@ -48,6 +52,7 @@ struct ResultView: View {
         }
     }
 }
+
 
 
 
@@ -95,7 +100,7 @@ struct LocationDetailView: View {
                     .fontWeight(.bold)
                     .padding(.bottom, 5)
 
-                Text(location.description) // Assuming this is the full description
+                Text(location.description)
                     .foregroundColor(.gray)
                     .padding()
             }
