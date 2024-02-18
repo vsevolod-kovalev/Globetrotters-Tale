@@ -191,7 +191,7 @@ struct ContentView: View {
                 }
             }
             .padding()
-            .navigationBarTitle("Search Page")
+            .navigationBarTitle("Let's travel to...")
         }
     }
 }
@@ -207,7 +207,7 @@ struct SearchBar: View {
 
     var body: some View {
         HStack {
-            TextField("Enter text", text: $text)
+            TextField("Paris...", text: $text)
                 .padding(8)
                 .background(Color(.systemGray6))
                 .cornerRadius(8)

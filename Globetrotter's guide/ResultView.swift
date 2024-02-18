@@ -24,7 +24,6 @@ func truncateString(_ string: String, toLength length: Int) -> String {
     }
 }
 
-
 struct ResultView: View {
     @Binding var query: String
     var cityDescriptionArg: String
@@ -37,7 +36,7 @@ struct ResultView: View {
                 NavigationLink(destination: LocationDetailView(location: Location(name: place.name, imageName: index < imageUrls.count ? imageUrls[index] : "placeholder", description: place.description))) {
                     HStack {
                         VStack(alignment: .leading) {
-                            Text(place.name)
+                            Text(place.name.trimmingCharacters(in: .whitespacesAndNewlines))
                                 .fontWeight(.bold)
 
                             Text(truncateString(place.description, toLength: 50))
@@ -47,7 +46,6 @@ struct ResultView: View {
                         
                         Spacer()
                         
-                        // Use AsyncImage to load image from URL
                         if index < imageUrls.count, let url = URL(string: imageUrls[index]) {
                             AsyncImage(url: url) { image in
                                 image.resizable()
@@ -57,7 +55,6 @@ struct ResultView: View {
                             .frame(width: 50, height: 50)
                             .clipShape(RoundedRectangle(cornerRadius: 5))
                         } else {
-                            // Placeholder image or view when URL is not available
                             Image(systemName: "photo")
                                 .resizable()
                                 .frame(width: 50, height: 50)
@@ -66,7 +63,9 @@ struct ResultView: View {
                     }
                 }
             }
+            .listStyle(PlainListStyle())
             .navigationBarTitle("Results")
+            
         }
     }
 }
@@ -141,8 +140,7 @@ struct LocationDetailView: View {
                 Text(location.name)
                     .font(.title)
                     .fontWeight(.bold)
-                    .padding(.top, 5)
-                    .padding(.bottom, 5)
+                    .padding(.top, 10)
 
                 Text(location.description)
                     .foregroundColor(.gray)
